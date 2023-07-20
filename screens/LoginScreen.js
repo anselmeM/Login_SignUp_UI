@@ -1,13 +1,16 @@
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
-import React from 'react';
-import { themeColors } from '../theme/theme';
+import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeftIcon } from 'react-native-heroicons/solid';
-import { useNavigation } from '@react-navigation/native';
-import LoginScreenStyles from '../styles/loginScreenStyles'; // Import the styles
+import LoginScreenStyles from '../styles/loginScreenStyles';
+import { themeColors } from '../theme/theme';
 
 export default function LoginScreen() {
   const navigation = useNavigation();
+
+  const [email,setEmail] =useState('');
+  const [password,setPassword] = useState('');
 
   return (
     <View  style={[LoginScreenStyles.container, { flex: 1, backgroundColor: themeColors.bg }]}>
@@ -23,18 +26,18 @@ export default function LoginScreen() {
       </SafeAreaView>
       <View style={LoginScreenStyles.form}>
 
-        <Text style={LoginScreenStyles.labelText}>Email Address</Text>
         <TextInput
           style={LoginScreenStyles.textInput}
           placeholder="email"
-          value="john@gmail.com"
+          value={email}
+          onChangeText={setEmail}
         />
-        <Text style={LoginScreenStyles.labelText}>Password</Text>
         <TextInput
           style={LoginScreenStyles.textInput}
           secureTextEntry
           placeholder="password"
-          value="test12345"
+          value='password'
+          onChangeText={setPassword}
         />
         <TouchableOpacity style={LoginScreenStyles.forgotPassword}>
           <Text style={LoginScreenStyles.labelText}>Forgot Password?</Text>
